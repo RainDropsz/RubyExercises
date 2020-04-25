@@ -5,14 +5,18 @@ the board is displayed in between turns.
 =end
 
 class Game
+
+  attr_reader :displ_array
+
   def initialize()
+
     puts "Let's Play 2-Player Tic Tac Toe!"
 
     player1 = Players.new()
     player2 = Players.new()
 
     # Print instructional board
-    @displ_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @displ_array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     print_board
 
     # Print Tic-Tac-Toe board
@@ -28,29 +32,32 @@ class Game
     # Alternate Turns
     for i in 1..9 do
       if i.odd?  
-        move = player1.move.to_i - 1
-        if @displ_array[ move ] != "x" ||  @displ_array[ move ] != "o"
+        move = player1.get_move.to_i 
+
+        if is_not_taken(move)
           @displ_array[ move ] = player1.marker
-          player1.add_move(move.to_i + 1)
-          print_board
+          player1.add_move(move)
 
           if player1.winner? 
             puts "Congratulations! Player 1 wins!"
             return
           end
         end
+        print_board
+          
       else
-        move = player2.move.to_i - 1
-        if @displ_array[ move ] != "x" ||  @displ_array[ move ] != "o"
+        move = player2.get_move.to_i
+        if is_not_taken(move)
           @displ_array[ move ] = player2.marker
-          player2.add_move(move.to_i + 1)
-          print_board
+          player2.add_move(move)
 
           if player2.winner? 
             puts "Congratulations! Player 2 wins!"
             return
           end
         end
+        print_board
+
       end
     end
 
@@ -58,10 +65,14 @@ class Game
 
   end
 
+  def is_not_taken(position)
+    @displ_array[position] != "x" && @displ_array[position] != "o"
+  end
+
   def print_board()
     string = ""
-    for i in 0..8 do
-       (i + 1) % 3 == 0 ? 
+    for i in 1..9 do
+       i % 3 == 0 ? 
        string = string + @displ_array[i].to_s + "\n" :
        string = string + @displ_array[i].to_s + "|"
     end
@@ -70,7 +81,7 @@ class Game
 end
 
 
-class Players < Game
+class Players
   attr_reader :marker
   @@count = 0
 
@@ -81,7 +92,7 @@ class Players < Game
     @moves_array = []
   end
 
-  def move()
+  def get_move()
     puts "Player #{@player_number}'s turn, place your #{@marker}"
     move = gets.chomp
   end
