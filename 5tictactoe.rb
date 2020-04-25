@@ -20,7 +20,7 @@ class Game
     print_board
 
     # Print Tic-Tac-Toe board
-    @displ_array = []
+    @displ_array = [0]
     for i in 1..3 do
       for j in 1..3 do 
         i < 3 ? @displ_array << "_" : @displ_array << " "
