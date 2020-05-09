@@ -35,18 +35,18 @@ class Tree
 
   def initialize(array)
     Benchmark.bm do |x|
-      x.report("iteration: ")  { build_tree(array) }
-      x.report("recursion: ")  { build_tree_recursion(array) }
+      x.report("iteration: ")  { @root = build_tree(array) }
+      x.report("recursion: ")  { @root = build_tree_recursion(array) }
     end
   end
 
 
   def build_tree(array) #uses iteration,= breadth first
     array = array.sort.uniq
-    root = Node.new( array [array.length / 2] )
+    root = Node.new( array [ array.length / 2 ] )
     @root = root
     bfs_queue = []
-    k = 0
+    queue_index = 0
 
 
     2.upto(Math.log2(array.length) + 1) do |i|
@@ -68,9 +68,8 @@ class Tree
 #           p "Created root.right = #{root.right.value} "
            bfs_queue << root.right
          end
-        root = bfs_queue[k]
-#        bfs_queue.each {|x| puts x.value;}
-        k += 1
+        root = bfs_queue[queue_index]
+        queue_index += 1
       end
     end
       
@@ -111,7 +110,7 @@ end
 a = [ 1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 b = [10,7,14,20,1,5,8,3, 9].sort.uniq   # [1, 5, 7, 8, 10, 14, 20]
 c = [0,1,2,3,4,5,6,7,8,9,10]
-d = (1..100000).map {rand}
+d = (1..2**11).map {rand}
 tree = Tree.new(d)
 tree.print_tree
 
