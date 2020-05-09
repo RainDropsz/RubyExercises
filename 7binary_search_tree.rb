@@ -79,6 +79,7 @@ class Tree
 
   
   def build_tree_recursion(array)
+    array = array.sort.uniq
     root = Node.new( array [ array.length / 2 ] )
 
     return root if array.length <= 1
