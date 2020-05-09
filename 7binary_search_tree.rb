@@ -36,34 +36,46 @@ class Tree
     @root = build_tree(array)
   end
 
-  #uses iteration, breadth first
+  #  build_tree: using iteration, breadth first
+  #  n = length of array
+  #  height of tree = log2(n) + 1
+  #                              1/2n
+  #                  1/4n                      3/4n
+  #           1/8n          3/8n         5/8n           7/8n
+  #      1/16n  3/16n   5/16n 7/16n   9/16n 11/16n  13/16n  15/16n
+
   def build_tree(array) 
     array = array.sort.uniq
+
     root = Node.new( array [ array.length / 2 ] )
     @root = root
+
     bfs_queue = []
     queue_index = 0
 
+    2.upto(Math.log2(array.length) + 1) do |i|  
+      1.step(2**i, 4) do |j|                    
 
-    2.upto(Math.log2(array.length) + 1) do |i|
-      1.step(2**i, 4) do |j|
-#        p "i = #{i} ; j = #{j} ; root = #{root.value}"
-         left_index =  (j)     * array.length / (2**i)
-         right_index = (j + 2) * array.length / (2**i) 
+        left_index =  (j)     * array.length / (2**i)
+        right_index = (j + 2) * array.length / (2**i) 
 
-         if array[left_index]            
-           root.left = Node.new(array [ left_index ] )
-           array[ left_index ] = nil
-#          p "Created root.left = #{root.left.value}"
-           bfs_queue << root.left 
-         end
+#       p "i = #{i} ; j = #{j} ; root = #{root.value}"
 
-         if array[right_index]
-           root.right = Node.new(array [ right_index] )
-           array[ right_index ] = nil
-#          p "Created root.right = #{root.right.value} "
-           bfs_queue << root.right
-         end
+        if array[left_index]            
+          root.left = Node.new(array [ left_index ] )
+          array[ left_index ] = nil
+          bfs_queue << root.left 
+
+#         p "Created root.left = #{root.left.value}"
+        end
+
+        if array[right_index]
+          root.right = Node.new(array [ right_index] )
+          array[ right_index ] = nil
+          bfs_queue << root.right
+
+#         p "Created root.right = #{root.right.value} "
+        end
         root = bfs_queue[queue_index]
         queue_index += 1
       end
@@ -113,8 +125,10 @@ def benchmark_test(array)
     x.report("recursion: ") { tree.build_tree_recursion(array) }
     x.report("iteration: ") { tree.build_tree(array)  }
   end
-
 end
+
+#array = (1..2**20).map { (rand * 100).to_i} 
+#benchmark_test array
 
 a = [ 1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 b = [10,7,14,20,1,5,8,3, 9].sort.uniq   # [1, 5, 7, 8, 10, 14, 20]
@@ -123,8 +137,7 @@ d = (1..16).map { (rand * 100).to_i}
 tree = Tree.new(d)
 tree.print_tree
 
-array = (1..2**20).map { (rand * 100).to_i} 
-benchmark_test array
+
 
 
 =begin
@@ -139,13 +152,6 @@ root.left = build_tree([1,5,7])
 -------------------------
 build_tree iteration
 
-n = length of array
-height of tree = log2(n) + 1
-Used breadth first search queue to traverse nodes
-                              1/2n
-                  1/4n                      3/4n
-           1/8n          3/8n         5/8n         7/8n
-      1/16n  3/16n   5/16n 7/16n   9/16n 11/16n 13/16n  15/16n
 
 =end
 
