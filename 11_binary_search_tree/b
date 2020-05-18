@@ -1,0 +1,80 @@
+Inspecting 5 files
+WCC.C
+
+Offenses:
+
+binary_search_tree.rb:80:1: C: Layout/EmptyLines: Extra blank line detected.
+binary_search_tree.rb:81:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def print_tree
+  ^^^^^^^^^^^^^^
+binary_search_tree.rb:82:36: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    PrintTree.new(@root).print_tree    
+                                   ^^^^
+binary_search_tree.rb:101:1: W: Lint/UselessAssignment: Useless assignment to variable - a.
+a = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+^
+binary_search_tree.rb:102:1: W: Lint/UselessAssignment: Useless assignment to variable - b.
+b = [10, 7, 14, 20, 1, 5, 8, 3, 9].sort.uniq # [1, 5, 7, 8, 10, 14, 20]
+^
+binary_search_tree.rb:104:1: W: Lint/UselessAssignment: Useless assignment to variable - d.
+d = (1..2**5 - 3).map { (rand * 100).to_i }
+^
+build_tree.rb:1:1: C: Style/Documentation: Missing top-level module documentation comment.
+module BuildTree
+^^^^^^
+build_tree.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
+module BuildTree
+^
+build_tree.rb:53:1: C: Layout/EmptyLinesAroundModuleBody: Extra empty line detected at module body end.
+delete_node.rb:51:1: C: Layout/EmptyLines: Extra blank line detected.
+delete_node.rb:52:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def del_node_with_one_or_zero_children(node = @node)
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+delete_node.rb:66:1: C: Style/BlockComments: Do not use block comments.
+=begin ...
+^^^^^^
+print_tree.rb:9:3: C: Metrics/AbcSize: Assignment Branch Condition size for print_tree is too high. [<8, 50, 7> 51.12/15]
+  def print_tree ...
+  ^^^^^^^^^^^^^^
+print_tree.rb:9:3: C: Metrics/MethodLength: Method has too many lines. [35/10]
+  def print_tree ...
+  ^^^^^^^^^^^^^^
+print_tree.rb:9:3: C: Metrics/PerceivedComplexity: Perceived complexity for print_tree is too high. [8/7]
+  def print_tree ...
+  ^^^^^^^^^^^^^^
+print_tree.rb:56:28: C: Naming/MethodParameterName: Method parameter must be at least 3 characters long.
+  def print_slashes(space, i, string)
+                           ^
+
+5 files inspected, 16 offenses detected
+Inspecting 5 files
+WC..C
+
+Offenses:
+
+binary_search_tree.rb:100:1: W: Lint/UselessAssignment: Useless assignment to variable - a.
+a = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+^
+binary_search_tree.rb:101:1: W: Lint/UselessAssignment: Useless assignment to variable - b.
+b = [10, 7, 14, 20, 1, 5, 8, 3, 9].sort.uniq # [1, 5, 7, 8, 10, 14, 20]
+^
+binary_search_tree.rb:103:1: W: Lint/UselessAssignment: Useless assignment to variable - d.
+d = (1..2**5 - 3).map { (rand * 100).to_i }
+^
+build_tree.rb:3:1: C: Style/Documentation: Missing top-level module documentation comment.
+module BuildTree
+^^^^^^
+print_tree.rb:9:3: C: Metrics/AbcSize: Assignment Branch Condition size for print_tree is too high. [<8, 50, 7> 51.12/15]
+  def print_tree ...
+  ^^^^^^^^^^^^^^
+print_tree.rb:9:3: C: Metrics/MethodLength: Method has too many lines. [35/10]
+  def print_tree ...
+  ^^^^^^^^^^^^^^
+print_tree.rb:9:3: C: Metrics/PerceivedComplexity: Perceived complexity for print_tree is too high. [8/7]
+  def print_tree ...
+  ^^^^^^^^^^^^^^
+print_tree.rb:56:28: C: Naming/MethodParameterName: Method parameter must be at least 3 characters long.
+  def print_slashes(space, i, string)
+                           ^
+
+5 files inspected, 8 offenses detected
