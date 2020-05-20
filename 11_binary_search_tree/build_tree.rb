@@ -10,9 +10,8 @@ module BuildTree
   #           1/8n          3/8n         5/8n           7/8n
   #      1/16n  3/16n   5/16n 7/16n   9/16n 11/16n  13/16n  15/16n
 
-  def build_tree_iteration(array)
-    @root = Node.new(array [array.length / 2])
-    @tmp_root = @root
+  def build_tree_iteration(array, root = Node.new(array [array.length / 2]))
+    @tmp_root = root
 
     queue = []
 
@@ -24,6 +23,7 @@ module BuildTree
         @tmp_root = queue.shift
       end
     end
+    root
   end
 
   def root_add_left_child(array, row, col, queue)

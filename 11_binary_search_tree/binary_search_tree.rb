@@ -23,13 +23,13 @@ class Tree
   require_relative 'delete_node'
   require_relative 'print_tree'
   require_relative 'build_tree'
+  require_relative 'traversal'
 
   include BuildTree
+  include Traversal
 
   def initialize(array)
-    @root = nil
-    @tmp_root = nil
-    build_tree_iteration(array.sort.uniq)
+    @root = build_tree_iteration(array.sort.uniq)
     # @root = build_tree_recursion(array.sort.uniq)
   end
 
@@ -65,6 +65,7 @@ class Tree
     end
   end
 
+  # delete a node from binary search tree
   def del(value)
     puts "delete value #{value}"
     node = find(value)
@@ -75,6 +76,37 @@ class Tree
     elsif value == node.value
       delete.del_node_with_one_or_zero_children
     end
+  end
+
+  # accepts a node, returns the depth
+  def depth(node, current = @root, count = 0)
+    until current == node
+      # if node.value < current.value
+      #   current = current.left
+      # else
+      #   current = current.right
+      # end
+      current = node.value < current.value ? current.left : current.right
+      count += 1
+    end
+    count
+  end
+
+  # checks if the tree is balanced
+  def balanced?
+    array = level_order
+    first_nil_pos = array.index { |node| node.value.nil? }
+    last_nil_pos = array.rindex(&:value)
+
+    first_depth = Math.log2(first_nil_pos + 1) - 1
+    last_depth = Math.log2(last_nil_pos + 1)
+
+    (first_depth.to_i - last_depth.to_i).between?(-1, 1)
+  end
+
+  def rebalance!(array = [])
+    in_order_recursion { |node| array << node.value }
+    @root = build_tree_iteration(array)
   end
 
   def print_tree
@@ -100,14 +132,25 @@ end
 a = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 b = [10, 7, 14, 20, 1, 5, 8, 3, 9].sort.uniq # [1, 5, 7, 8, 10, 14, 20]
 c = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-d = (1..2**5 - 3).map { (rand * 100).to_i }
-tree = Tree.new(c)
+d = (1..2**3).map { (rand * 100).to_i }
+tree = Tree.new(d)
 tree.print_tree
-tree.del(8)
-tree.del(9)
-tree.del(6)
-tree.del(7)
-tree.del(5)
-tree.del(8)
-tree.del(2)
+
+# tree.level_order do |n|
+#   puts n.value
+# end
+
+# tree.level_order.each { |node| print "#{node.value}  " }
+# puts "\n"
+
+# tree.post_order_recursion do |n|
+#   puts n.value
+# end
+
+tree.pre_order_recursion { |n| print "#{n.value} depth: #{tree.depth(n)} ; " }
+puts "\n"
+tree.insert 0
+tree.print_tree
+p "balanced? #{tree.balanced?}"
+tree.rebalance!
 tree.print_tree
