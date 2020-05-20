@@ -154,23 +154,22 @@ end
 # tree.rebalance!
 # tree.print_tree
 
-
 # #11: Write a simple driver script
 array = Array.new(15) { rand(1..100) }
 tree = Tree.new(array)
 tree.print_tree
 puts "Tree balanced?  #{tree.balanced? ? 'yes' : 'no'}"
 print 'Level Order: '
-tree.level_order { |node| print "#{node.value} "}
+tree.level_order { |node| print "#{node.value} " }
 puts "\n"
 print 'Pre Order: '
-tree.pre_order_recursion { |node| print "#{node.value} "}
+tree.pre_order_recursion { |node| print "#{node.value} " }
 puts "\n"
 print 'Post Order: '
-tree.post_order_recursion { |node| print "#{node.value} "}
+tree.post_order_recursion { |node| print "#{node.value} " }
 puts "\n"
 print 'In Order: '
-tree.in_order_recursion { |node| print "#{node.value} "}
+tree.in_order_recursion { |node| print "#{node.value} " }
 puts "\n"
 
 5.times { tree.insert rand(1..200) }
@@ -180,14 +179,14 @@ tree.rebalance!
 tree.print_tree
 puts "Tree balanced?  #{tree.balanced? ? 'yes' : 'no'}"
 print 'Level Order: '
-tree.level_order { |node| print "#{node.value} "}
+tree.level_order { |node| print "#{node.value} " }
 puts "\n"
 print 'Pre Order: '
-tree.pre_order_recursion { |node| print "#{node.value} "}
+tree.pre_order_recursion { |node| print "#{node.value} " }
 puts "\n"
 print 'Post Order: '
-tree.post_order_recursion { |node| print "#{node.value} "}
+tree.post_order_recursion { |node| print "#{node.value} " }
 puts "\n"
 print 'In Order: '
-tree.in_order_recursion { |node| print "#{node.value} "}
+tree.in_order_recursion { |node| print "#{node.value} " }
 puts "\n"
