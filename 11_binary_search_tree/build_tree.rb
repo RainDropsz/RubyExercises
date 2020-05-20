@@ -44,13 +44,13 @@ module BuildTree
     queue << @tmp_root.right
   end
 
-  #  def build_tree_recursion(array)
-  #    root = Node.new(array [array.length / 2])
-  #    return root if array.length <= 1
+  def build_tree_recursion(array)
+    root = Node.new(array [array.length / 2])
+    return root if array.length <= 1
 
-  #    root.left  = build_tree_recursion(array [0..array.length / 2 - 1])
-  #    root.right = build_tree_recursion(array [array.length / 2 + 1..-1])
+    root.left  = build_tree_recursion(array [0..array.length / 2 - 1])
+    root.right = build_tree_recursion(array [array.length / 2 + 1..-1])
 
-  #    root
-  #  end
+    root
+  end
 end

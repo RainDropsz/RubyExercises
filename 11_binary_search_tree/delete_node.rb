@@ -61,15 +61,4 @@ class DeleteNode < Tree
       parent_node.right = (node.left || node.right)
     end
   end
-
-  #   def del(value)
-  #     puts "delete value #{value}"
-  #     node = find(value)
-  #
-  #     if value == node.value && node.left && node.right
-  #       del_node_with_two_children(node)
-  #     elsif value == node.value
-  #       del_node_with_one_or_zero_children(node)
-  #     end
-  #   end
 end
