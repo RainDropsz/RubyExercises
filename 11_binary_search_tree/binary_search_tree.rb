@@ -37,7 +37,6 @@ class Tree
   # if node not found, returns last leaf
   def find(value)
     node = @root
-    return node if value == node.value
 
     until value == node.value
       if value < node.value
@@ -129,12 +128,12 @@ end
 # array = (1..2**20).map { (rand * 2**40).to_i }
 # benchmark_test array
 
-a = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-b = [10, 7, 14, 20, 1, 5, 8, 3, 9].sort.uniq # [1, 5, 7, 8, 10, 14, 20]
-c = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-d = (1..2**3).map { (rand * 100).to_i }
-tree = Tree.new(d)
-tree.print_tree
+# a = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+# b = [10, 7, 14, 20, 1, 5, 8, 3, 9].sort.uniq # [1, 5, 7, 8, 10, 14, 20]
+# c = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# d = (1..2**3).map { (rand * 100).to_i }
+# tree = Tree.new(d)
+# tree.print_tree
 
 # tree.level_order do |n|
 #   puts n.value
@@ -147,10 +146,48 @@ tree.print_tree
 #   puts n.value
 # end
 
-tree.pre_order_recursion { |n| print "#{n.value} depth: #{tree.depth(n)} ; " }
-puts "\n"
-tree.insert 0
+# tree.pre_order_recursion { |n| print "#{n.value} depth: #{tree.depth(n)} ; " }
+# puts "\n"
+# tree.insert 0
+# tree.print_tree
+# p "balanced? #{tree.balanced?}"
+# tree.rebalance!
+# tree.print_tree
+
+
+# #11: Write a simple driver script
+array = Array.new(15) { rand(1..100) }
+tree = Tree.new(array)
 tree.print_tree
-p "balanced? #{tree.balanced?}"
+puts "Tree balanced?  #{tree.balanced? ? 'yes' : 'no'}"
+print 'Level Order: '
+tree.level_order { |node| print "#{node.value} "}
+puts "\n"
+print 'Pre Order: '
+tree.pre_order_recursion { |node| print "#{node.value} "}
+puts "\n"
+print 'Post Order: '
+tree.post_order_recursion { |node| print "#{node.value} "}
+puts "\n"
+print 'In Order: '
+tree.in_order_recursion { |node| print "#{node.value} "}
+puts "\n"
+
+5.times { tree.insert rand(1..200) }
+tree.print_tree
+puts "Tree balanced?  #{tree.balanced? ? 'yes' : 'no'}"
 tree.rebalance!
 tree.print_tree
+puts "Tree balanced?  #{tree.balanced? ? 'yes' : 'no'}"
+print 'Level Order: '
+tree.level_order { |node| print "#{node.value} "}
+puts "\n"
+print 'Pre Order: '
+tree.pre_order_recursion { |node| print "#{node.value} "}
+puts "\n"
+print 'Post Order: '
+tree.post_order_recursion { |node| print "#{node.value} "}
+puts "\n"
+print 'In Order: '
+tree.in_order_recursion { |node| print "#{node.value} "}
+puts "\n"
