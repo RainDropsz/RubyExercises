@@ -37,8 +37,9 @@ class Tree
   end
 
   def print_path(finish, inprogress)
-    print "Shortest path from #{@root.value} to #{finish} is: "
-    inprogress.each { |n| print "#{n.value} " }
+    print "Shortest path from #{@root.value} to #{finish} "
+    print "is #{inprogress.length - 1} moves \n"
+    inprogress.each { |n| puts " #{n.value} " }
     puts "\n"
   end
 
