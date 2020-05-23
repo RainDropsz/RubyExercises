@@ -30,7 +30,7 @@ class Tree
 
   def initialize(array)
     @root = build_tree_iteration(array.sort.uniq)
-    # @root = build_tree_recursion(array.sort.uniq)
+    p @root = build_tree_recursion(array.sort.uniq)
   end
 
   # find method accepts a value and returns node with given value
@@ -39,7 +39,7 @@ class Tree
     until value == node.value
       if value < node.value
         node.left  ? node = node.left  : break
-      else
+      elsif 
         node.right ? node = node.right : break
       end
     end
@@ -107,3 +107,6 @@ class Tree
     PrintTree.new(@root).print_tree
   end
 end
+
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+Tree.new(array)

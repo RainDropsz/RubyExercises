@@ -44,8 +44,7 @@ module BuildTree
     queue << @tmp_root.right
   end
 
-  def build_tree_recursion(array)
-    root = Node.new(array [array.length / 2])
+  def build_tree_recursion(array, root = Node.new(array [array.length / 2]))
     return root if array.length <= 1
 
     root.left  = build_tree_recursion(array [0..array.length / 2 - 1])
